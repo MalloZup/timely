@@ -6,9 +6,7 @@ Timely is a Clojure library for scheduling tasks according to a timetable, as an
 
 The library is hosted at <a href="https://clojars.org/factual/timely">Clojars</a>. Just add this to your dependencies:
 
-```clojure
-[factual/timely "0.0.3"]
-```
+[![Clojars Project](https://img.shields.io/clojars/v/factual/timely.svg)](https://clojars.org/factual/timely)
 
 ## Setup
 
@@ -35,6 +33,10 @@ See the "Define Schedules" section below for more examples of the schedule DSL.
 Define a scheduled-item using a schedule and a function to be executed on the defined schedule. For example:
 
 ```clojure
+(defn test-print-fn [id]
+  (fn []
+    (println "Task" id "scheduled at: " (java.util.Date.))))
+
 ;; Daily at 12:00am
 (scheduled-item
   (daily)
@@ -134,7 +136,7 @@ Use `end-schedule` to deschedule a task with the specified id:
 (let [item (scheduled-item
             (each-minute)
             (test-print-fn "Scheduled using start-schedule"))]
-  (let [sched-id (start-schedule item)]
+  (let [sched-id (start-schedule scheduler item)]
     (Thread/sleep (* 1000 60 2))
     (end-schedule scheduler sched-id)))
 ```
