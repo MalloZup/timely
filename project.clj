@@ -1,5 +1,4 @@
-(defproject factual/timely "0.0.3"
-  :main timely.core
+(defproject factual/timely "0.0.4"
   :description "Timely: A clojure library for defining schedules and running them as an alternative to cron"
   :dependencies [[clj-time "0.14.2"]
                  [org.clojure/clojure "1.8.0"]
