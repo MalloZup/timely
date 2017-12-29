@@ -6,13 +6,13 @@ Timely is a Clojure library for scheduling tasks according to a timetable, as an
 
 The library is hosted at <a href="https://clojars.org/factual/timely">Clojars</a>. Just add this to your dependencies:
 
-```
+```clojure
 [factual/timely "0.0.3"]
 ```
 
 ## Setup
 
-```
+```clojure
 (ns yournamespace.core
   (:require [timely.core :as timely]))
   (timely/start-scheduler)
@@ -24,7 +24,7 @@ Schedules are a structured way to represent cron syntax and are created using a 
 
 	timely.core> (schedule-to-cron (each-minute))
 	"* * * * *"
-	
+
 See the "Define Schedules" section below for more examples of the schedule DSL.
 
 ## Define Schedules
@@ -116,7 +116,7 @@ The following are further examples of the dsl for defining schedules:
   (end-time 1337107380000))
  (test-print-fn "specific-time-range"))
 ```     
-          
+
 ## Run Schedules
 
 Use (start-scheduler) to enable scheduling in your application.
