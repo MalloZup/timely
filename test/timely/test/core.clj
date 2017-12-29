@@ -28,12 +28,11 @@
   start-schedule and end-schedule.  The schedule will be removed after
   2 minutes in this demo."
   []
-  (start-scheduler scheduler)
+  (start-scheduler)
   (let [item (scheduled-item
-              scheduler
-              (each-minute)
-              (test-print-fn "Scheduled using start-schedule"))]
-    (let [sched-id (start-schedule item)]
+               (each-minute)
+               (test-print-fn "Scheduled using start-schedule"))]
+    (let [sched-id (start-schedule scheduler item)]
       (Thread/sleep (* 1000 60 2))
       (end-schedule scheduler sched-id)))
   (while true
