@@ -23,8 +23,10 @@ The library is hosted at <a href="https://clojars.org/factual/timely">Clojars</a
 
 Schedules are a structured way to represent cron syntax and are created using a DSL which reads much like an English sentence.  To get a cron string from a schedule, use schedule-to-cron.  For example:
 
-	timely.core> (schedule-to-cron (each-minute))
-	"* * * * *"
+```clojure
+timely.core> (schedule-to-cron (each-minute))
+"* * * * *"
+```
 
 See the "Define Schedules" section below for more examples of the schedule DSL.
 
@@ -39,7 +41,7 @@ Define a scheduled-item using a schedule and a function to be executed on the de
   (test-print-fn 1))
 ```
 
-(daily) creates a schedule that runs each day at 12:00am.  (test-print-fn 1) returns a function that will print a message.  The combined scheduled-item will print the message each day at 12:00am.
+`(daily)` creates a schedule that runs each day at 12:00am.  `(test-print-fn 1)` returns a function that will print a message.  The combined scheduled-item will print the message each day at 12:00am.
 
 Specific start and end times can be optionally defined to ensure a repeated schedule is only valid for a certain time frame.  This is a feature recognized by the Timely scheduler but does not exist in cron string syntax.
 
