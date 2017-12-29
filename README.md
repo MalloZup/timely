@@ -15,7 +15,8 @@ The library is hosted at <a href="https://clojars.org/factual/timely">Clojars</a
 ```clojure
 (ns yournamespace.core
   (:require [timely.core :as timely]))
-  (timely/start-scheduler)
+
+(def scheduler (timely/start-scheduler))
 ```
 
 ## Schedule DSL and Cron
@@ -33,8 +34,9 @@ Define a scheduled-item using a schedule and a function to be executed on the de
 
 ```clojure
 ;; Daily at 12:00am
-(scheduled-item (daily)
-				(test-print-fn 1))
+(scheduled-item
+  (daily)
+  (test-print-fn 1))
 ```
 
 (daily) creates a schedule that runs each day at 12:00am.  (test-print-fn 1) returns a function that will print a message.  The combined scheduled-item will print the message each day at 12:00am.
@@ -119,16 +121,24 @@ The following are further examples of the dsl for defining schedules:
 
 ## Run Schedules
 
-Use (start-scheduler) to enable scheduling in your application.
-
-Use start-schedule and end-schedule to start and stop schedules in your application:
+Use `start-scheduler` to start schedules in your application:
 
 ```clojure
-(start-scheduler)
+(def scheduler (start-scheduler))
+```
+
+Use `end-schedule` to deschedule a task with the specified id:
+```clojure
 (let [item (scheduled-item
             (each-minute)
             (test-print-fn "Scheduled using start-schedule"))]
   (let [sched-id (start-schedule item)]
     (Thread/sleep (* 1000 60 2))
-    (end-schedule sched-id)))
+    (end-schedule scheduler sched-id)))
+```
+
+Use `stop-scheduler` to shutdown the scheduler instance:
+
+```clojure
+(stop-scheduler scheduler)
 ```
